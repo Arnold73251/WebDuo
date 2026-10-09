@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+
 import "./App.css";
 
 const projects = [
@@ -323,7 +324,9 @@ function App() {
         <button className="footer-back" onClick={() => scrollTo("top")}>
           {text.footerBack}
         </button>
+      
       </footer>
+      
     </div>
   );
 }

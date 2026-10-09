@@ -86,17 +86,28 @@ button:focus-visible, a:focus-visible {
 }
 
 .brand-symbol {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(157, 132, 255, 0.7);
-  border-radius: 11px;
-  background: linear-gradient(135deg, rgba(117, 87, 255, 0.22), rgba(49, 172, 255, 0.12));
+  border: 1px solid rgba(116, 163, 255, 0.55);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #222044, #10263c);
+  box-shadow:
+    0 0 18px rgba(112, 102, 255, 0.12),
+    inset 0 0 12px rgba(86, 174, 255, 0.08);
   font-family: 'Space Grotesk', sans-serif;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+}
+
+.brand-symbol span {
+  background: linear-gradient(135deg, #a997ff, #67ccff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .brand-symbol span {
