@@ -1,255 +1,420 @@
 
 import { useState } from "react";
-
 import "./App.css";
 
 const projects = [
   {
     number: "01",
     name: "DailyMystery",
-    category: { fr: "Jeu en ligne", en: "Online game" },
+    category: { fr: "Jeu de réflexion", en: "Puzzle game" },
     description: {
-      fr: "Un jeu de devinettes où chaque question met ta logique à l'épreuve. Joue, trouve les réponses et accumule des points.",
-      en: "A riddle game where every question tests your logic. Play, find the answers, and collect points.",
+      fr: "Résous des énigmes, teste ta logique et tente de trouver les bonnes réponses. Un jeu quotidien pour te challenger.",
+      en: "Solve riddles, test your logic, and find the right answers. A daily game designed to challenge you.",
     },
+    tags: ["React", "JavaScript", "Game"],
     url: "https://daily-mystery-nine.vercel.app/",
     style: "mystery",
-    icon: "✦",
+    icon: "✳",
   },
   {
     number: "02",
     name: "ExcuseIA",
-    category: { fr: "Outil web", en: "Web tool" },
+    category: { fr: "Outil intelligent", en: "Smart tool" },
     description: {
-      fr: "Un site pour trouver des idées d'excuses selon différentes situations, avec plusieurs styles et la possibilité de garder ses préférées.",
-      en: "A website for finding excuse ideas for different situations, with different styles and the ability to save favourites.",
+      fr: "Crée des excuses adaptées à différentes situations grâce à une interface simple, rapide et facile à utiliser.",
+      en: "Create excuses for different situations through a simple, fast, and easy-to-use interface.",
     },
+    tags: ["React", "AI concept", "Web"],
     url: "https://excuse-ia.vercel.app/",
     style: "excuse",
-    icon: "✳",
+    icon: "✧",
   },
   {
     number: "03",
     name: "Dual Paths Together",
     category: { fr: "Projet web", en: "Web project" },
     description: {
-      fr: "Découvre Dual Paths Together, un projet web accessible directement en ligne.",
-      en: "Discover Dual Paths Together, a web project you can explore online.",
+      fr: "Un projet web au concept original, pensé autour d'une expérience visuelle moderne et d'une navigation intuitive.",
+      en: "An original web concept built around a modern visual experience and intuitive navigation.",
     },
+    tags: ["Web design", "UI/UX", "Web"],
     url: "https://dual-paths-together.lovable.app/",
-    style: "dual",
-    icon: "⟡",
+    style: "paths",
+    icon: "↗",
   },
 ];
+
+const translations = {
+  fr: {
+    navProjects: "Projets",
+    navAbout: "À propos",
+    navContact: "Contact",
+    availability: "Projets personnels en développement",
+    heroEyebrow: "STUDIO WEB INDÉPENDANT",
+    heroLine1: "Des idées simples.",
+    heroLine2: "Des projets",
+    heroLine3: "qui prennent vie.",
+    heroDescription:
+      "Nous imaginons et créons des expériences web modernes, utiles et accessibles. Chaque projet est une nouvelle occasion d'apprendre et de construire.",
+    viewProjects: "Découvrir nos projets",
+    contactUs: "Nous contacter",
+    scroll: "DÉFILER POUR EXPLORER",
+    miniLabel: "NOS UNIVERS",
+    miniTitle: "Trois idées, trois directions.",
+    miniText: "Du jeu à la création web.",
+    projectsEyebrow: "CE QUE NOUS CRÉONS",
+    projectsTitle: "Nos projets",
+    projectsDescription:
+      "Des idées personnelles transformées en expériences web concrètes. Et ce n'est que le début.",
+    visitProject: "Visiter le projet",
+    aboutEyebrow: "DERRIÈRE L'ÉCRAN",
+    aboutTitle: "Apprendre en créant.",
+    aboutDescription:
+      "WebDuo est un espace dédié à la création de projets web. Nous explorons le développement, le design et les idées numériques en construisant des projets concrets, étape par étape.",
+    aboutPoint1Title: "Curiosité avant tout",
+    aboutPoint1Text: "Tester, comprendre et découvrir de nouvelles possibilités.",
+    aboutPoint2Title: "Construire pour apprendre",
+    aboutPoint2Text: "Chaque projet nous aide à progresser et à faire mieux.",
+    aboutPoint3Title: "Un design qui a du sens",
+    aboutPoint3Text: "Des interfaces claires, modernes et agréables à utiliser.",
+    contactEyebrow: "ON DISCUTE ?",
+    contactTitle: "Une idée en tête ?",
+    contactDescription:
+      "Une question, une suggestion ou simplement envie de parler d'un projet ? Écris-nous.",
+    emailButton: "Nous envoyer un e-mail",
+    backTop: "Retour en haut ↑",
+    footerText: "Imaginé avec curiosité. Construit projet après projet.",
+    madeWith: "Un petit studio indépendant.",
+    externalLink: "Ouvrir le projet",
+  },
+  en: {
+    navProjects: "Projects",
+    navAbout: "About",
+    navContact: "Contact",
+    availability: "Independent projects in development",
+    heroEyebrow: "INDEPENDENT WEB STUDIO",
+    heroLine1: "Simple ideas.",
+    heroLine2: "Projects",
+    heroLine3: "brought to life.",
+    heroDescription:
+      "We imagine and build modern, useful, and accessible web experiences. Every project is a new opportunity to learn and create.",
+    viewProjects: "Explore our projects",
+    contactUs: "Get in touch",
+    scroll: "SCROLL TO EXPLORE",
+    miniLabel: "OUR WORLDS",
+    miniTitle: "Three ideas, three directions.",
+    miniText: "From games to web creation.",
+    projectsEyebrow: "WHAT WE CREATE",
+    projectsTitle: "Our projects",
+    projectsDescription:
+      "Personal ideas transformed into real web experiences. And this is only the beginning.",
+    visitProject: "Visit project",
+    aboutEyebrow: "BEHIND THE SCREEN",
+    aboutTitle: "Learning by creating.",
+    aboutDescription:
+      "WebDuo is a space dedicated to building web projects. We explore development, design, and digital ideas by creating real projects, one step at a time.",
+    aboutPoint1Title: "Curiosity comes first",
+    aboutPoint1Text: "Testing, understanding, and discovering new possibilities.",
+    aboutPoint2Title: "Build to learn",
+    aboutPoint2Text: "Every project helps us improve and do better.",
+    aboutPoint3Title: "Design with purpose",
+    aboutPoint3Text: "Clear, modern interfaces that are enjoyable to use.",
+    contactEyebrow: "LET'S TALK",
+    contactTitle: "Have an idea?",
+    contactDescription:
+      "A question, a suggestion, or just want to talk about a project? Send us a message.",
+    emailButton: "Send us an email",
+    backTop: "Back to top ↑",
+    footerText: "Imagined with curiosity. Built one project at a time.",
+    madeWith: "An independent little studio.",
+    externalLink: "Open project",
+  },
+};
+
+function ArrowIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="arrow-icon"
+    >
+      <path
+        d="M5 12h14M13 5l7 7-7 7"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ExternalIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="external-icon"
+    >
+      <path
+        d="M14 4h6v6M20 4l-9 9"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 function App() {
   const [language, setLanguage] = useState("fr");
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = translations[language];
 
-  const isFr = language === "fr";
+  const closeMenu = () => setMenuOpen(false);
 
-  const text = {
-    navProjects: isFr ? "Projets" : "Projects",
-    navAbout: isFr ? "À propos" : "About",
-    navContact: isFr ? "Contact" : "Contact",
-    badge: isFr ? "Deux esprits. Des idées sans limites." : "Two minds. Ideas without limits.",
-    heroLine1: isFr ? "Nous créons" : "We build",
-    heroLine2: isFr ? "des expériences" : "digital",
-    heroLine3: isFr ? "digitales." : "experiences.",
-    heroDescription: isFr
-      ? "Nous imaginons et développons des sites web avec une seule idée en tête : transformer des idées en projets concrets."
-      : "We design and build websites with one goal in mind: turning ideas into real projects.",
-    explore: isFr ? "Découvrir nos projets" : "Explore our projects",
-    contactButton: isFr ? "Parlons de ton idée ↗" : "Let's talk about your idea ↗",
-    projectsEyebrow: isFr ? "CE QUE NOUS CRÉONS" : "WHAT WE CREATE",
-    projectsTitle: isFr ? "Nos projets." : "Our projects.",
-    projectsDescription: isFr
-      ? "Chaque projet est une occasion d'apprendre, de créer et d'aller plus loin."
-      : "Every project is an opportunity to learn, create, and go further.",
-    visit: isFr ? "Visiter le site" : "Visit website",
-    aboutEyebrow: isFr ? "QUI SOMMES-NOUS ?" : "WHO ARE WE?",
-    aboutTitle1: isFr ? "Deux passionnés," : "Two passionate",
-    aboutTitle2: isFr ? "une même ambition." : "minds, one ambition.",
-    aboutDescription:
-      "Nous sommes deux jeunes passionnés par la création de sites web. Nous développons nos propres projets et voulons aider d'autres personnes à donner vie à leurs idées en ligne.",
-    aboutNote: isFr
-      ? "Nous apprenons en créant, en testant et en améliorant chaque projet."
-      : "We learn by building, testing, and improving every project.",
-    whatWeDo: isFr ? "CE QUE NOUS FAISONS" : "WHAT WE DO",
-    service1: isFr ? "Création de sites web" : "Website creation",
-    service2: isFr ? "Développement de projets" : "Project development",
-    service3: isFr ? "Idées et solutions digitales" : "Digital ideas and solutions",
-    contactEyebrow: isFr ? "UN PROJET EN TÊTE ?" : "HAVE A PROJECT IN MIND?",
-    contactTitle1: isFr ? "Créons quelque" : "Let's build",
-    contactTitle2: isFr ? "chose ensemble." : "something together.",
-    contactDescription: isFr
-      ? "Tu as une idée, une question ou un projet ? Écris-nous, nous serons ravis d'en discuter."
-      : "Have an idea, a question, or a project? Send us a message. We'd love to hear about it.",
-    emailButton: isFr ? "Nous envoyer un e-mail ↗" : "Send us an email ↗",
-    footerText: isFr ? "Conçu avec passion." : "Made with passion.",
-    footerBack: isFr ? "Retour en haut ↑" : "Back to top ↑",
-    openMenu: isFr ? "Ouvrir le menu" : "Open menu",
-  };
+  const emailSubject = encodeURIComponent(
+    language === "fr" ? "Contact depuis WebDuo" : "Contact from WebDuo"
+  );
 
-  function scrollTo(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  }
+  const emailBody = encodeURIComponent(
+    language === "fr"
+      ? "Bonjour WebDuo,\n\nJe vous contacte à propos de..."
+      : "Hello WebDuo,\n\nI am contacting you about..."
+  );
 
   return (
     <div className="site-wrapper" id="top">
-      <header className="navbar">
-        <a className="brand" href="#top" aria-label="WebDuo home">
-          <span className="brand-symbol">W<span>D</span></span>
-          <span className="brand-name">Web<span>Duo</span></span>
+      <header className="site-header">
+        <a
+          className="brand"
+          href="#top"
+          onClick={closeMenu}
+          aria-label="WebDuo, accueil"
+        >
+          <span className="brand-symbol" aria-hidden="true">
+            <span>W</span>
+            <span>D</span>
+          </span>
+          <span className="brand-name">
+            Web<span>Duo</span>
+            <small>WEB STUDIO</small>
+          </span>
         </a>
 
         <button
-          className="mobile-menu-button"
+          className="mobile-menu-toggle"
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={text.openMenu}
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}
         >
-          {menuOpen ? "✕" : "☰"}
+          <span />
+          <span />
         </button>
 
-        <nav className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
-          <button onClick={() => scrollTo("projects")}>{text.navProjects}</button>
-          <button onClick={() => scrollTo("about")}>{text.navAbout}</button>
-          <button onClick={() => scrollTo("contact")}>{text.navContact}</button>
-          <button
-            className="language-toggle"
-            onClick={() => setLanguage(isFr ? "en" : "fr")}
-            aria-label="Change language"
-          >
-            <span className={isFr ? "language-active" : ""}>FR</span>
-            <span className="language-divider">/</span>
-            <span className={!isFr ? "language-active" : ""}>EN</span>
-          </button>
+        <nav
+          className={`main-nav ${menuOpen ? "nav-open" : ""}`}
+          aria-label="Navigation principale"
+        >
+          <a href="#projects" onClick={closeMenu}>
+            {t.navProjects}
+          </a>
+          <a href="#about" onClick={closeMenu}>
+            {t.navAbout}
+          </a>
+          <a href="#contact" onClick={closeMenu}>
+            {t.navContact}
+          </a>
+
+          <div className="language-switch" aria-label="Choose language">
+            <button
+              type="button"
+              className={language === "fr" ? "active" : ""}
+              onClick={() => {
+                setLanguage("fr");
+                closeMenu();
+              }}
+              aria-pressed={language === "fr"}
+            >
+              FR
+            </button>
+            <span aria-hidden="true">/</span>
+            <button
+              type="button"
+              className={language === "en" ? "active" : ""}
+              onClick={() => {
+                setLanguage("en");
+                closeMenu();
+              }}
+              aria-pressed={language === "en"}
+            >
+              EN
+            </button>
+          </div>
         </nav>
       </header>
 
       <main>
-        <section className="hero section-container">
+        <section className="hero section-container" aria-labelledby="hero-title">
           <div className="hero-content">
-            <div className="eyebrow">
+            <div className="status-line">
               <span className="status-dot" />
-              {text.badge}
+              {t.availability}
             </div>
 
-            <h1>
-              {text.heroLine1}
+            <p className="eyebrow">
+              <span className="eyebrow-line" />
+              {t.heroEyebrow}
+            </p>
+
+            <h1 id="hero-title">
+              {t.heroLine1}
               <br />
-              <span className="gradient-text">{text.heroLine2}</span>
+              {t.heroLine2}
               <br />
-              {text.heroLine3}
+              <span className="gradient-text">{t.heroLine3}</span>
             </h1>
 
-            <p className="hero-description">{text.heroDescription}</p>
+            <p className="hero-description">{t.heroDescription}</p>
 
             <div className="hero-actions">
-              <button className="button-primary" onClick={() => scrollTo("projects")}>
-                {text.explore} <span>↘</span>
-              </button>
-              <button className="button-secondary" onClick={() => scrollTo("contact")}>
-                {text.contactButton}
-              </button>
+              <a className="button button-primary" href="#projects">
+                {t.viewProjects}
+                <ArrowIcon />
+              </a>
+              <a className="button button-secondary" href="#contact">
+                {t.contactUs}
+              </a>
             </div>
 
-            <div className="hero-bottom-note">
-              <span className="note-line" />
-              <span>{isFr ? "IMAGINER · CONSTRUIRE · AMÉLIORER" : "IMAGINE · BUILD · IMPROVE"}</span>
-            </div>
+            <a className="scroll-indicator" href="#projects">
+              <span className="scroll-icon" aria-hidden="true">
+                ↓
+              </span>
+              {t.scroll}
+            </a>
           </div>
 
-          <div className="hero-art" aria-hidden="true">
-            <div className="art-orbit orbit-one" />
-            <div className="art-orbit orbit-two" />
-            <div className="art-orbit orbit-three" />
-            <div className="art-glow" />
-            <div className="art-core">
-              <span className="core-w">W</span>
-              <span className="core-d">D</span>
+          <div className="hero-visual" aria-label="Illustration WebDuo">
+            <div className="visual-glow" />
+            <div className="orbit orbit-one" />
+            <div className="orbit orbit-two" />
+            <div className="orbit orbit-three" />
+
+            <div className="orbit-node node-one">W</div>
+            <div className="orbit-node node-two">✳</div>
+            <div className="orbit-node node-three">↗</div>
+
+            <div className="hero-monogram">
+              <span className="monogram-top">W</span>
+              <span className="monogram-bottom">D</span>
+              <div className="monogram-caption">IDEAS IN MOTION</div>
             </div>
+
             <div className="floating-card floating-card-top">
-              <span className="floating-icon">✦</span>
-              <span>{isFr ? "Une idée" : "An idea"}</span>
+              <span className="floating-icon purple">✦</span>
+              <span>
+                <strong>Creative</strong>
+                <small>Ideas & concepts</small>
+              </span>
             </div>
-            <div className="floating-card floating-card-bottom">
-              <span className="floating-check">↗</span>
-              <span>{isFr ? "Un projet concret" : "A real project"}</span>
-            </div>
-            <div className="art-star star-one">✧</div>
-            <div className="art-star star-two">✦</div>
-            <div className="art-star star-three">·</div>
-          </div>
 
-          <div className="hero-scroll">
-            <span className="scroll-line" />
-            <span>{isFr ? "FAIS DÉFILER POUR EXPLORER" : "SCROLL TO EXPLORE"}</span>
+            <div className="floating-card floating-card-bottom">
+              <span className="floating-icon blue">{"</>"}</span>
+              <span>
+                <strong>Build & learn</strong>
+                <small>One step at a time</small>
+              </span>
+              <span className="mini-check">✓</span>
+            </div>
           </div>
         </section>
 
-        <section className="projects-section section-container" id="projects">
+        <section className="intro-strip" aria-label={t.miniLabel}>
+          <div className="section-container intro-strip-inner">
+            <div>
+              <span className="strip-label">{t.miniLabel}</span>
+              <h2>{t.miniTitle}</h2>
+            </div>
+            <p>{t.miniText}</p>
+            <span className="strip-decoration" aria-hidden="true">
+              ✳
+            </span>
+          </div>
+        </section>
+
+        <section
+          className="projects-section section-container section-spacing"
+          id="projects"
+          aria-labelledby="projects-title"
+        >
           <div className="section-heading">
             <div>
-              <p className="section-eyebrow">{text.projectsEyebrow}</p>
-              <h2>{text.projectsTitle}</h2>
+              <p className="eyebrow">
+                <span className="eyebrow-line" />
+                {t.projectsEyebrow}
+              </p>
+              <h2 className="section-title" id="projects-title">
+                {t.projectsTitle}
+                <span className="title-period">.</span>
+              </h2>
             </div>
-            <p className="section-intro">{text.projectsDescription}</p>
+            <p className="section-description">{t.projectsDescription}</p>
           </div>
 
           <div className="projects-grid">
             {projects.map((project) => (
-              <article className={`project-card ${project.style}`} key={project.name}>
-                <div className="project-card-top">
-                  <span className="project-number">{project.number} / 03</span>
-                  <span className="project-icon">{project.icon}</span>
+              <article
+                className={`project-card project-${project.style}`}
+                key={project.name}
+              >
+                <div className="project-art">
+                  <div className="project-art-grid" />
+                  <span className="project-number">{project.number}</span>
+                  <div className="project-art-symbol" aria-hidden="true">
+                    {project.icon}
+                  </div>
+                  <div className="project-art-caption">
+                    <span>WEBDUO</span>
+                    <span>{project.number} / 03</span>
+                  </div>
                 </div>
 
-                <div className="project-preview" aria-hidden="true">
-                  {project.style === "mystery" && (
-                    <div className="mystery-preview">
-                      <div className="preview-mini-label">DAILY / MYSTERY</div>
-                      <div className="mystery-symbol">?</div>
-                      <div className="preview-dots"><i /><i /><i /><i /><i /></div>
-                    </div>
-                  )}
-
-                  {project.style === "excuse" && (
-                    <div className="excuse-preview">
-                      <div className="excuse-spark">✳</div>
-                      <div className="excuse-preview-lines">
-                        <span />
-                        <span />
-                        <span />
-                      </div>
-                      <div className="excuse-pill">IA ✦</div>
-                    </div>
-                  )}
-
-                  {project.style === "dual" && (
-                    <div className="dual-preview">
-                      <div className="dual-path path-left" />
-                      <div className="dual-path path-right" />
-                      <div className="dual-center">↗</div>
-                      <div className="dual-small-dot dot-left" />
-                      <div className="dual-small-dot dot-right" />
-                    </div>
-                  )}
-                </div>
-
-                <div className="project-info">
-                  <span className="project-category">{project.category[language]}</span>
+                <div className="project-card-content">
+                  <div className="project-category">
+                    {project.category[language]}
+                  </div>
                   <h3>{project.name}</h3>
-                  <p>{project.description[language]}</p>
+                  <p className="project-description">
+                    {project.description[language]}
+                  </p>
+
+                  <div className="project-tags">
+                    {project.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+
                   <a
                     className="project-link"
                     href={project.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
+                    aria-label={`${t.externalLink}: ${project.name}`}
                   >
-                    {text.visit} <span>↗</span>
+                    {t.visitProject}
+                    <ExternalIcon />
                   </a>
                 </div>
               </article>
@@ -257,78 +422,141 @@ function App() {
           </div>
         </section>
 
-        <section className="about-section section-container" id="about">
+        <section
+          className="about-section section-container section-spacing"
+          id="about"
+          aria-labelledby="about-title"
+        >
           <div className="about-visual">
-            <div className="about-visual-frame">
-              <div className="about-photo-placeholder">
-                <div className="placeholder-symbol">W<span>D</span></div>
-                <p>{isFr ? "Arnold & son coéquipier" : "Arnold & teammate"}</p>
-                <span>{isFr ? "Bientôt, notre photo ici" : "Our photo coming soon"}</span>
+            <div className="about-frame">
+              <div className="about-frame-inner">
+                <div className="about-big-letters" aria-hidden="true">
+                  WD
+                </div>
+                <div className="about-frame-caption">
+                  <span>WEB</span>
+                  <span>DESIGN</span>
+                  <span>DEVELOPMENT</span>
+                </div>
               </div>
-              <div className="about-corner corner-top-left" />
-              <div className="about-corner corner-bottom-right" />
+              <span className="frame-corner corner-tl" />
+              <span className="frame-corner corner-tr" />
+              <span className="frame-corner corner-bl" />
+              <span className="frame-corner corner-br" />
             </div>
-            <div className="about-visual-label">
-              <span className="status-dot" />
-              {isFr ? "EN TRAIN DE CRÉER" : "BUSY CREATING"}
+            <div className="about-floating-note">
+              <span className="note-star">✳</span>
+              <span>
+                <strong>Curiosity</strong>
+                <small>drives creativity</small>
+              </span>
             </div>
           </div>
 
           <div className="about-content">
-            <p className="section-eyebrow">{text.aboutEyebrow}</p>
-            <h2>
-              {text.aboutTitle1}
-              <br />
-              <span className="gradient-text">{text.aboutTitle2}</span>
+            <p className="eyebrow">
+              <span className="eyebrow-line" />
+              {t.aboutEyebrow}
+            </p>
+            <h2 className="section-title" id="about-title">
+              {t.aboutTitle}
+              <span className="title-period">.</span>
             </h2>
-            <p className="about-description">{text.aboutDescription}</p>
-            <p className="about-note">{text.aboutNote}</p>
+            <p className="about-description">{t.aboutDescription}</p>
 
-            <div className="services">
-              <p className="services-title">{text.whatWeDo}</p>
-              <div className="service-item"><span>01</span>{text.service1}<span className="service-arrow">↗</span></div>
-              <div className="service-item"><span>02</span>{text.service2}<span className="service-arrow">↗</span></div>
-              <div className="service-item"><span>03</span>{text.service3}<span className="service-arrow">↗</span></div>
+            <div className="about-points">
+              <div className="about-point">
+                <span className="point-number">01</span>
+                <div>
+                  <h3>{t.aboutPoint1Title}</h3>
+                  <p>{t.aboutPoint1Text}</p>
+                </div>
+              </div>
+              <div className="about-point">
+                <span className="point-number">02</span>
+                <div>
+                  <h3>{t.aboutPoint2Title}</h3>
+                  <p>{t.aboutPoint2Text}</p>
+                </div>
+              </div>
+              <div className="about-point">
+                <span className="point-number">03</span>
+                <div>
+                  <h3>{t.aboutPoint3Title}</h3>
+                  <p>{t.aboutPoint3Text}</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="contact-section section-container" id="contact">
-          <div className="contact-card">
-            <div className="contact-decoration decoration-one" />
-            <div className="contact-decoration decoration-two" />
+        <section
+          className="contact-section section-container"
+          id="contact"
+          aria-labelledby="contact-title"
+        >
+          <div className="contact-panel">
+            <div className="contact-orb contact-orb-one" />
+            <div className="contact-orb contact-orb-two" />
+
             <div className="contact-content">
-              <p className="section-eyebrow">{text.contactEyebrow}</p>
-              <h2>
-                {text.contactTitle1}
-                <br />
-                <span className="gradient-text">{text.contactTitle2}</span>
-              </h2>
-              <p>{text.contactDescription}</p>
-              <a className="button-primary email-button" href="mailto:gmarnoldbs@gmail.com">
-                {text.emailButton}
+              <p className="eyebrow">
+                <span className="eyebrow-line" />
+                {t.contactEyebrow}
+              </p>
+              <h2 id="contact-title">{t.contactTitle}</h2>
+              <p>{t.contactDescription}</p>
+
+              <a
+                className="button button-light"
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=gmarnoldbs%40gmail.com&su=${emailSubject}&body=${emailBody}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.emailButton}
+                <ArrowIcon />
               </a>
-              <span className="contact-email">gmarnoldbs@gmail.com</span>
             </div>
-            <div className="contact-orb" aria-hidden="true">↗</div>
+
+            <div className="contact-decoration" aria-hidden="true">
+              <div className="contact-decoration-ring ring-one" />
+              <div className="contact-decoration-ring ring-two" />
+              <span>✳</span>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="footer section-container">
-        <a className="brand footer-brand" href="#top">
-          <span className="brand-symbol">W<span>D</span></span>
-          <span className="brand-name">Web<span>Duo</span></span>
-        </a>
-        <p>© {new Date().getFullYear()} WebDuo. {text.footerText}</p>
-        <button className="footer-back" onClick={() => scrollTo("top")}>
-          {text.footerBack}
-        </button>
-      
+      <footer className="site-footer">
+        <div className="section-container footer-inner">
+          <a className="brand footer-brand" href="#top" aria-label="WebDuo, accueil">
+            <span className="brand-symbol" aria-hidden="true">
+              <span>W</span>
+              <span>D</span>
+            </span>
+            <span className="brand-name">
+              Web<span>Duo</span>
+              <small>WEB STUDIO</small>
+            </span>
+          </a>
+
+          <p className="footer-message">{t.footerText}</p>
+
+          <div className="footer-right">
+            <a href="#top">{t.backTop}</a>
+            <span>© {new Date().getFullYear()} WebDuo</span>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <div className="section-container">
+            <span>{t.madeWith}</span>
+            <span>DESIGNED WITH INTENTION · BUILT WITH CURIOSITY</span>
+          </div>
+        </div>
       </footer>
-      
     </div>
   );
 }
 
 export default App;
+
